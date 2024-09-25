@@ -1,0 +1,1717 @@
+longest common prefix
+
+Q1.They gave me two linked lists and asked to add them in another linked list
+
+
+1. create mergeHead
+2. l1>data <=l2 merge head = l1 aur l1  = li->next
+3. create mergetail = mergeHead
+4. while loop l1 and l2
+5. if l1.>data<=l2 = tail->next = l1 = l1->next
+6. else case ma hmare paas aajaye ga mergetail = l2 aur l2 = l2->next
+7 check l1 not empty then mergetail->next is equal to l1
+8. check l2 not empty then merge tail->next is equal to l2
+
+
+
+Q2. How to convert stack to a Queue
+
+
+two methods: make push method costly
+
+q1 and q2 two queues
+
+q2.push(1) jitney element ma q2 aur swap karduga
+
+
+push karna hota ha 1 toh q2 ma push aur jitney element hongey q1 ma q2 ma daal duga
+
+q1 ma 1 chala jayega
+
+
+class Stack{
+
+int N;
+
+queue<int> q1;
+queue<int> q2;
+
+Stack(){
+N=0;
+
+};
+
+
+
+void push(int val)
+
+{
+
+	// koi naya element aaya ha
+
+	q2.push(val)
+	N++;
+
+// last in first out
+	while(!q1.empty()){
+
+	q2.push(q1.front());
+	q1.pop()
+
+queue<int> temp = q1;
+
+q1 = q2;
+
+q2 = temp;	
+
+
+}
+
+explanation:
+
+-------q2 ma input
+q1 ke saare q2 ma 
+
+1 2 3 4
+
+q2 = 1
+
+q1 = empty
+
+q2 = empty
+q1 = 1
+
+3
+
+q2  = 3 1------------
+
+
+
+void pop()
+{
+
+
+q1.pop();
+N--;
+
+}
+
+int top()
+
+{
+	return q1.front();
+
+
+}
+
+
+
+
+
+Q3. Reverse Link List Question Of DSA
+
+Iterative Method:
+
+previous and current pointer and next
+
+previous = null;
+
+
+current->next = previous
+current  = head
+
+
+next = current->next
+
+head = previous pointer
+
+
+node*reverse(node*head){
+
+	node*prevptr = nullptr
+	node*current = head;
+	node* nextptr;
+
+	
+	while(currentptr!=nullptr)
+	
+	{
+	
+	nextptr = current->next;
+	currptr->next = prevptr;
+
+	prevptr = currentptr;
+	currentptr=nextptr
+
+	}
+
+	return prevptr;
+
+}
+
+
+
+Q4. 3 sum problem, the most optimal solution.
+
+
+array and value given, exist three numbers whos sum equal to value
+
+brute force
+i = 0 to i to n
+j = i+1 to j to n
+
+k = j+1
+
+
+1.sort the array
+2. first element of triplet
+3. then combine all less than the first x=A[i]
+
+first phr uss ma target jitna bachta ha ussey se minus
+
+suppose 2nd index is 4 and target 24 then remaining after 20 is to be found
+
+sort karne ma time laga nlogn
+
+har element pe two sum poblem n*n
+
+bool found = true;
+
+sort the array
+
+loop i to n
+
+int lo = i+1; hi = n-1
+
+while(lo<hi)
+
+{
+
+	int current = arr[i]+arr[lo]+arr[hi];
+	if(current==target)
+
+	found = true
+	
+	if(current<low)
+	low++;
+	else
+{
+
+hi--
+if(found)
+{
+cout<<True:
+
+
+
+}
+
+
+
+
+
+
+
+Q5. How do you find the sum of two linked lists using Stack?
+
+
+LinkedList addTwoLists(LinkedList& l2) {
+    stack<int> s1, s2;
+    Node* temp1 = head;
+    Node* temp2 = l2.head;
+
+    // Push elements of the first list onto stack s1
+    while (temp1) {
+        s1.push(temp1->data);
+        temp1 = temp1->next;
+    }
+
+    // Push elements of the second list onto stack s2
+    while (temp2) {
+        s2.push(temp2->data);
+        temp2 = temp2->next;
+    }
+
+    int carry = 0;
+    LinkedList result;
+
+    // Add the elements from both stacks
+    while (!s1.empty() || !s2.empty() || carry) {
+        int sum = carry;
+        if (!s1.empty()) {
+            sum += s1.top();
+            s1.pop();
+        }
+        if (!s2.empty()) {
+            sum += s2.top();
+            s2.pop();
+        }
+        carry = sum / 10;
+        sum = sum % 10;
+
+        // Insert sum at the head of the result list
+        Node* newNode = new Node(sum);
+        newNode->next = result.head;
+        result.head = newNode;
+    }
+
+    return result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Q6. If we update database views will the tables be updated from which the view was generated?
+
+No, A view is a virtual table based on the result set of an SQL query. It can contain rows and columns from one or more tables. It can simplify the complex queuet
+
+
+Q7. how to make all zeros in the array to one side of it in o(n)
+
+    int A[] = { 5, 6, 0, 4, 6, 0, 9, 0, 8 }; 
+    int n = sizeof(A) / sizeof(A[0]); 
+    int j = 0; 
+    for (int i = 0; i < n; i++) { 
+        if (A[i] != 0) { 
+            swap(A[j], A[i]); // Partitioning the array 
+            j++; 
+        } 
+    }
+
+// all zeros on left side
+
+
+int A[] = { 5, 6, 0, 4, 6, 0, 9, 0, 8 , 0 , 7 , 1 }; 
+	int n = sizeof(A) / sizeof(A[0]); 
+	int j = n; 
+	for (int i = n; i >= 0 ; i--) { 
+		if (A[i] != 0) { 
+			swap(A[j], A[i]); // Partitioning the array 
+			j--; 
+		} 
+	} 
+
+
+
+
+ Q8. write a query of joins.
+
+
+
+Q10. find a duplicate from the link list with the 2.2.complexity of o(n) 2.
+
+
+int findDuplicate(ListNode* head) {
+    unordered_set<int> seen;
+    
+    ListNode* current = head;
+    while (current) {
+        if (seen.find(current->val) != seen.end()) {
+            return current->val; // Duplicate found
+        } else {
+            seen.insert(current->val); // Add current value to the set
+        }
+        current = current->next; // Move to the next node
+    }
+    return -1; // If no duplicate is found
+}
+
+
+
+
+
+Q11. sort stack using stacks only
+
+
+Q11. find midpoint of a linked list
+
+
+slow and fast pointer
+
+slow pointer -> one by one
+
+fast pointer -> skip one
+
+case:
+
+odd nodes: 
+
+
+
+if head==NULL
+	return null
+
+fast pointer jab tak null nai hota
+
+if fast pointer null ho jaye we will return
+
+fast pointer ke next ma null aagya we will return the slow pointer
+
+2 check:
+
+fast pointer null aur fast ke next ma null aajata ha
+
+if(head=NULL) return null;
+
+// null ka next nai hota , slow pointer will return
+
+
+fast  = head
+slow = heaad
+
+fast jo ha woh even ko return krne ke liye aur fast->next woh odd
+
+while (fast!=NULL and fast->next!=NULL)
+{
+
+	slow = slow->next;
+
+	fast = fast->next->next
+
+}
+
+return slow pointer
+
+
+
+
+
+
+
+
+
+Q13. Why we use Stack Instead of Other?
+
+
+Q14. Remove duplicates from array
+
+ You have two numbers 5,7. Make a function that return 5 if its input is 7 and vice versa. 
+
+  7 4 = 25 
+
+public int fiveOrSeven(int input){
+    return 35 / input;
+}
+
+
+argument ma agar 5 bheje 12-5
+
+return 7
+
+
+
+Q15. Db basics and few questions about react.
+
+
+Q16.Real world example of abstraction?
+
+
+Q17. analytical question, oop question concepts, dsa and programming problem solving questions
+
+
+Q18.Describe your self. What's your life goals.
+
+
+
+Q20. What is Polymorphism? Overloading and overriding? How to convert stack to a Queue?
+
+
+
+
+Difference between recursion & iteration
+
+
+There are two candles, each candle could be burned from both sides, if a candle is burning from one side it takes 60 minutes to completely burn it. You have no time measurement device and you have to burn both of the candles in exact 45 minutes.
+
+One of the questions that I was asked was to solve a problem related to hundreds of doors opening and closing .
+
+How to make a queue with a stack?
+
+
+What is class and object
+
+
+
+
+. 3. Given a singly linked list and an integer n reverse the n size chunks and return the complete linked list. E.g. list 1->2->3->4->5->6 and n = 2 will return 2->1->4->3->6->5 I had to code the complete algo. 2nd Interview 4. He asked me to code the second question (palindrome). 5. He asked me to solve the two-sum problem in O(n) and a single loop. 6. He asked me to solve the . 7. At last he gave me a simple database query that uses group by.
+
+
+
+Given an array full of integers from 0 to 4 in random order how will you sort this array
+
+
+void bubbleSort(int arr[], int n)
+{
+    int i, j;
+    bool swapped;
+    for (i = 0; i < n - 1; i++) {
+        swapped = false;
+        for (j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+
+        // If no two elements were swapped
+        // by inner loop, then break
+        if (swapped == false)
+            break;
+    }
+}
+
+
+2. Given a singly linked list find if the list is a palindrome,
+you only have to head no length is given and you have to solve in one loop and one pass, O(n) 
+
+
+// Function to check if the linked list
+// is palindrome or not
+bool isPalin(Node* head)
+{
+
+    // Temp pointer
+    Node* slow = head;
+
+    // Declare a stack
+    stack<int> s;
+
+    // Push all elements of the list
+    // to the stack
+    while (slow != NULL) {
+        s.push(slow->data);
+
+        // Move ahead
+        slow = slow->ptr;
+    }
+
+    // Iterate in the list again and
+    // check by popping from the stack
+    while (head != NULL) {
+
+        // Get the top most element
+        int i = s.top();
+
+        // Pop the element
+        s.pop();
+
+        // Check if data is not
+        // same as popped element
+        if (head->data != i) {
+            return false;
+        }
+
+        // Move ahead
+        head = head->ptr;
+    }
+
+    return true;
+}
+
+
+
+
+
+
+
+Q2:balls in the bag problem analytical problem
+
+
+8 balls 1 is deffective
+
+convert into three categores 2 has 3 balls and 1 has two balls
+
+c1 and c2 are equal
+
+c3 is equal to 
+
+
+
+
+
+Difference between http and https
+
+
+Describe Polymorphism and multiple inheritance
+
+
+Find loop in LinkedList. All OPPS concepts. 2 to 3 coding questions. Problem-solving skills.
+
+
+is LinkList is subset of graph?
+
+
+Reverse single linked list in a single triversal
+
+
+Questions were mostly related to databases. Schema design, normalization, data structures like red black tree, and lot of link list questions and also they ask about some puzzles to solve.
+
+
+Q1. Swap paorwise links of linklist
+
+void pairWiseSwap(Node* head)
+{
+    Node* temp = head;
+ 
+    /* Traverse further only if 
+    there are at-least two nodes left */
+    while (temp != NULL && temp->next != NULL) {
+        /* Swap data of node with 
+           its next node's data */
+        swap(temp->data,
+             temp->next->data);
+ 
+        /* Move temp by 2 for the next pair */
+        temp = temp->next->next;
+    }
+}
+
+
+
+
+
+It is average Questions asked Types of constructor Operator overloading Function overloading What is oop Db Write two queries Left and right outer join Programming 
+
+question Rotation of array
+
+
+using temp array
+
+d position se aagy tak aik array ma 
+
+0 se d tak aik ma
+
+
+/*Function to left rotate arr[] of size n by d*/
+void Rotate(int arr[], int d, int n)
+{
+    int p = 1;
+    while (p <= d) {
+        int last = arr[0];
+        for (int i = 0; i < n - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        arr[n - 1] = last;
+        p++;
+    }
+}
+
+
+
+
+Linked list Tree / Graph SQL queries Analytical question BST
+
+
+Principle of oop and design related questions ❓
+
+
+Q: To find if sum of two numbers in an array equals to a given number
+
+
+to detect only one pair
+
+// Function to check if array has 2 elements
+// whose sum is equal to the given value
+bool hasArrayTwoCandidates(int A[], int arr_size, int sum)
+{
+    int l, r;
+
+    /* Sort the elements */
+    sort(A, A + arr_size);
+
+    /* Now look for the two candidates in
+       the sorted array*/
+    l = 0;
+    r = arr_size - 1;
+    while (l < r) {
+        if (A[l] + A[r] == sum)
+            return 1;
+        else if (A[l] + A[r] < sum)
+            l++;
+        else // A[l] + A[r] > sum
+            r--;
+    }
+    return 0;
+}
+
+
+// Function to find and print pair
+bool chkPair(int A[], int size, int x)
+{
+    for (int i = 0; i < (size - 1); i++) {
+        for (int j = (i + 1); j < size; j++) {
+            if (A[i] + A[j] == x) {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
+}
+
+
+void printPairs(int arr[], int arr_size, int sum)
+{
+    unordered_set<int> s;
+    for (int i = 0; i < arr_size; i++) {
+        int temp = sum - arr[i];
+
+        if (s.find(temp) != s.end()) {
+            cout << "Yes" << endl;
+            return;
+        }
+        s.insert(arr[i]);
+    }
+    cout << "No" << endl;
+}
+
+
+
+
+
+find duplicate values in an array
+
+vector<int> duplicates(long long arr[], int n) {
+    // Step 1: Create an empty unordered map to store element frequencies
+    unordered_map<long long, int> freqMap;
+    vector<int> result;
+
+    // Step 2: Iterate through the array and count element frequencies
+    for (int i = 0; i < n; i++) {
+        freqMap[arr[i]]++;
+    }
+
+    // Step 3: Iterate through the hashmap to find duplicates
+    for (auto& entry : freqMap) {
+        if (entry.second > 1) {
+            result.push_back(entry.first);
+        }
+    }
+
+    // Step 4: If no duplicates found, add -1 to the result
+    if (result.empty()) {
+        result.push_back(-1);
+    }
+    //step 5: sort the result
+    sort(result.begin(),result.end());
+    // Step 6: Return the result vector containing duplicate elements or -1
+    return result;
+}
+
+
+
+
+
+
+
+
+
+how to remove duplicate elements of array?
+
+
+
+// Function to remove duplicate  
+// elements This function returns  
+// new size of modified array. 
+int removeDuplicates(int arr[], int n) 
+{ 
+    // Return, if array is empty or  
+    // contains a single element 
+    if (n == 0 || n == 1) 
+        return n; 
+  
+    int temp[n]; 
+  
+    // Start traversing elements 
+    int j = 0; 
+  
+    // If current element is not equal  
+    // to next element then store that  
+    // current element 
+    for (int i = 0; i < n - 1; i++) 
+        if (arr[i] != arr[i + 1]) 
+            temp[j++] = arr[i]; 
+  
+    // Store the last element as whether  
+    // it is unique or repeated, it hasn't  
+    // stored previously 
+    temp[j++] = arr[n - 1]; 
+  
+    // Modify original array 
+    for (int i = 0; i < j; i++) 
+        arr[i] = temp[i]; 
+  
+    return j; 
+} 
+
+
+
+
+
+
+Why is denormallization required?
+
+
+Rope fire problem, Machine problem
+
+
+
+There are three machines. Each answers yes/no questions by flashing either a red light or a green light. The relationship between colors and words is unknown; for example, a green light may mean yes, but it could also mean no. Two of these machines always tell the truth, while one just answers randomly (it’s broken).
+
+
+
+
+
+“If I were to ask you whether green means yes and whether the machine nearest you is broken, would the colored responses be the same?”
+
+
+
+
+
+6. Write a SQL query to print FIRST_NAME from the Student table after replacing ‘a’ with ‘A’.
+SELECT REPLACE(FIRST_NAME, 'a', 'A') FROM Student;
+
+
+11. Write a SQL query to print details of the Students whose FIRST_NAME ends with ‘a’.
+SELECT * FROM Student WHERE FIRST_NAME LIKE '%a';
+
+
+13. Write an SQL query to print details of the Students whose GPA lies between 9.00 and 9.99.
+SELECT * FROM Student WHERE GPA BETWEEN 9.00 AND 9.99;
+
+
+14. Write an SQL query to fetch the count of Students having Major Subject ‘Computer Science’.
+SELECT Major, COUNT(*) as TOTAL_COUNT FROM Student WHERE MAJOR = 'Computer Science';
+
+
+15. Write an SQL query to fetch Students full names with GPA >= 8.5 and <= 9.5.
+SELECT CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME FROM Student WHERE GPA BETWEEN 8.5 and 9.5;
+
+
+
+16. Write an SQL query to fetch the no. of Students for each MAJOR subject in the descending order.
+SELECT MAJOR, COUNT(MAJOR) from Student group by MAJOR order by COUNT(MAJOR);
+
+
+18. Write an SQL query to show only odd rows from Student table.
+SELECT * FROM Student WHERE student_id % 2 != 0;
+
+
+42. Write an SQL query to find the average GPA for each major.
+SELECT MAJOR, AVG(GPA) AS AVERAGE_GPA FROM Student GROUP BY MAJOR;
+
+43. Write an SQL query to show the top 3 students with the highest GPA.
+SELECT * FROM Student ORDER BY GPA DESC LIMIT 3;
+
+
+44. Write an SQL query to find the number of students in each major who have a GPA greater than 7.5.
+SELECT MAJOR, COUNT(STUDENT_ID) AS HIGH_GPA_COUNT FROM Student WHERE GPA > 3.5 GROUP BY MAJOR;
+
+45. Write an SQL query to find the students who have the same GPA as ‘Shivansh Mahajan’.
+SELECT * FROM Student WHERE GPA = (SELECT GPA FROM Student WHERE FIRST_NAME = 'Shivansh' 
+AND LAST_NAME = 'Mahajan');
+
+
+
+
+nth position linked list
+
+// function to insert a Node at required position
+void insertPos(Node** current, int pos, int data)
+{
+    // This condition to check whether the
+    // position given is valid or not.
+    if (pos < 1 || pos > size + 1)
+        cout << "Invalid position!" << endl;
+    else {
+ 
+        // Keep looping until the pos is zero
+        while (pos--) {
+ 
+            if (pos == 0) {
+ 
+                // adding Node at required position
+                Node* temp = getNode(data);
+ 
+                // Making the new Node to point to 
+                // the old Node at the same position
+                temp->next = *current;
+ 
+                // Changing the pointer of the Node previous 
+                // to the old Node to point to the new Node
+                *current = temp;
+            }
+            else
+              // Assign double pointer variable to point to the 
+              // pointer pointing to the address of next Node 
+              current = &(*current)->next;
+        }
+        size++;
+    }
+}
+
+
+/* This function returns true if given linked 
+   list is circular, else false. */
+bool isCircular(struct Node *head) 
+{ 
+    // An empty linked list is circular 
+    if (head == NULL) 
+       return true; 
+  
+    // Next of head 
+    struct Node *node = head->next; 
+  
+    // This loop would stop in both cases (1) If 
+    // Circular (2) Not circular 
+    while (node != NULL && node != head) 
+       node = node->next; 
+  
+    // If loop stopped because of circular 
+    // condition 
+    return (node == head); 
+} 
+
+
+// != ka matlab hota ha hash map ma pehle hi ha
+
+bool detectLoop(struct Node* h)
+{
+    unordered_set<Node*> s;
+    while (h != NULL) {
+        // If this node is already present
+        // in hashmap it means there is a cycle
+        // (Because you will be encountering the
+        // node for the second time).
+        if (s.find(h) != s.end())
+            return true;
+
+        // If we are seeing the node for
+        // the first time, insert it in hash
+        s.insert(h);
+
+        h = h->next;
+    }
+
+    return false;
+}
+
+--------------------------2nd approach----------------------------------
+
+
+check loop
+
+node*p and q = head
+
+while p && q && q->next
+
+p->next
+p->next->next
+
+if p==q
+return p
+
+start of the cycle
+
+while p which is point where the both meet
+
+p!=q
+
+p = p->next
+q = q->next
+
+
+    void removeCycle(ListNode* head) {
+        ListNode* startOfCycle = findCycleStart(head);
+        if (startOfCycle == nullptr) {
+            return;
+        }
+
+        ListNode* p = startOfCycle;
+        while (p->next != startOfCycle) {
+            p = p->next;
+        }
+        p->next = nullptr;
+    }
+
+
+
+
+remove loop and find start where to loop
+
+pass p and where loop find
+
+q = head
+
+while p!=q
+
+p  = p->next
+q = q->next
+
+
+
+
+
+=======================================================
+
+int main() {
+   
+   int arr[] = {0,3,2,1,0,4,5};
+   
+    int length = sizeof(arr) / sizeof(arr[0]);
+   
+   cout<<length<<endl;
+    int counter = 0;
+   
+   for(int i = 0 ; i<length ; i++)
+   {
+       if(arr[i]!=0)
+       
+       {
+           arr[counter++] = arr[i];
+       }
+       
+       
+   }
+   
+   while(counter<length)
+       {
+           arr[counter++] = 0;
+       }
+       
+       for(int i = 0 ; i<length ; i++){
+           cout<<arr[i]<<endl;
+       }
+
+    return 0;
+}
+
+
+// Reverse string
+
+char array[] = {"Hello"};
+    
+    int n = strlen(array);
+    
+    //cout<<n;
+    
+    int j = n-1;
+    
+    
+    for(int i = 0;i<n/2 ; i++,j--)
+    {
+        char temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+
+// palindrome of string
+
+    // check string palindrome or not
+    
+    char array[] = {"radar"};
+    
+    int n = strlen(array);
+    
+    int j = n-1;
+    
+    bool isPalindrome = false;
+    
+    for(int i = 0;i<n/2 ; i++,j--)
+    {
+        cout<<"Ma kitni baar chala hun"<<endl;
+        
+       if(array[i]==array[j])
+       {
+           isPalindrome = true;
+       }
+       else
+       {
+           isPalindrome = false;
+           break;
+       }
+    }
+    
+    if(isPalindrome)
+    {
+        cout<<"It is palindrome"<<endl;
+    }
+    else
+    {
+        cout<<"It is not palindrome"<<endl;
+    }
+
+// fctorial of a number
+
+       int number = 10;
+       long long int fact = 1;
+    
+    
+    for(int i = 1 ; i<=number; i++)
+    {
+        fact  = i*fact;
+    }
+    
+    cout<<"Factorial is: "<<fact<<endl;
+
+
+// check anagrams
+
+1. number of characters 256
+2. array ma integer waali all 256 be zero
+3. loop n1 ki length and n2 ki length aur phr ussi integer par count1[str[i]++;
+4. sirf woh waali 1 ho jayegi baaki zero, phr se aayega toh 2 ho jayegi
+5. phr num of characters tak aur har aik se compare
+
+each other */
+bool areAnagram(char* str1, char* str2)
+{
+	// Create 2 count arrays and initialize all values as 0
+	int count1[NO_OF_CHARS] = { 0 };
+	int count2[NO_OF_CHARS] = { 0 };
+	int i;
+
+	// For each character in input strings, increment count
+	// in the corresponding count array
+	for (i = 0; str1[i] && str2[i]; i++) {
+	    
+	     cout<<"str is: "<<str1[i]<<endl;
+
+	     cout<<"Count1 is: "<<count1[str1[i]]<<endl;
+
+	}
+	
+	
+
+	// If both strings are of different length. Removing
+	// this condition will make the program fail for strings
+	// like "aaca" and "aca"
+	if (str1[i] || str2[i])
+		return false;
+
+	// Compare count arrays
+	for (i = 0; i < NO_OF_CHARS; i++)
+		if (count1[i] != count2[i])
+			return false;
+
+	return true;
+}
+
+
+// fibo 
+
+int fib(int n)
+{
+	int a = 0, b = 1, c, i;
+	if (n == 0)
+		return a;
+	for (i = 2; i <= n; i++) {
+		c = a + b; 
+		cout<<"c = a+b : " <<c <<"= "<<a<<"+"<<b<<endl; 
+		a = b;
+		cout<<"a=b : " <<a <<"= "<<b<<endl; 
+
+		b = c;
+				cout<<"b=c : " <<b <<"= "<<c<<endl; 
+    
+    cout<<"============="<<endl;
+
+	}
+	return b;
+}
+
+
+
+// Returns number of pairs in arr[0..n-1] with sum equal
+// to 'sum'
+int getPairsCount(int arr[], int n, int k)
+{
+    unordered_set<int> s;
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (s.find(k - arr[i]) != s.end()) {
+            count++;
+        }
+        else
+          s.insert(k-arr[i]);
+    }
+    return count;
+}
+
+
+
+---------------------------------------
+
+
+
+aik humne useState ka component bnaya hua ha woh false hai
+toh doosre component ma hum woh component paas karde ge with their function
+toh waha se hum false karde ge
+
+body parser
+
+nodemailer
+
+How to sort the array without using loop.
+
+
+Cut a cake with 3 cuts into 8 slices.
+
+
+Written test: 1) Reversing string 2) difference between linked list and doubly linked list 3) sql query of second maximum highest salary 4) swap two numbers without using third variable Interview: 1) tell me about yourself 2) describe yourself in three words 3) there are 10 balls. 9 balls are of 4kg and 1 ball is of 3kg. Find that 3kg ball. You can check the weight of the balls in a scale (trazu) inly three times only. 4) how to cut a cake in 8 pieces by making only 3 cuts
+
+
+--------------------------------------------------------------------------------
+
+		Database
+
+
+DB:organized collection of data
+
+RDMS: stores data in the for table as compared to DBMS which stores as files
+
+
+indexing was not introduced in traditional file-based system
+
+AUTHENITICAtION and verification
+
+
+different languages present in DBMS:
+
+DDL: CREATE,ALTER,DROP,TRUNCATE
+
+DML: SELECT UPDATE DELETE,INSERT
+
+DCL:which are required to deal with user permissions and controls of database systems
+
+GRANT and REVOKE
+
+TCL: deals with transaction of the database:
+
+	COMMIT,ROLLBACK,SAVEPOINT
+
+
+Atomicity: executying whole queury or nothing at all = update reflected in whole database
+
+Consistency: remains consistent
+
+Isolation: transaction is occurying independent ongoing transaction not affect another transaction
+
+Durability: data not lost in cases of system failure
+
+NULL is very different from zero:
+
+NULL represents unknowns number of zero courses has not been taken b any course
+
+
+Entities are basically real world objects like Student
+
+Entity Type: collection of objects that has same attributes
+
+
+Join is used make denormalized the table
+
+Lock: protect a shared piece of data from getting updated
+
+Exclusive lock: lock on transaction that is about to perform
+
+
+DELETE : delete rows from a table based on the condition WHERE clause
+
+delete only rows which are specified by WHERE clause
+
+it can be rolled back if required
+
+Truncate: is used to remove complete data from a table
+Delete command which has no where clause
+
+removes complete data form table in a database
+can't be rolled back
+
+
+Intension: database scheme is used to define the description of database and is specified during design of the database and mostly remains unchanged.
+
+Extension: present the number of tuples in the database at any given point in time.
+The extension of a database is also database is also referred as snapshot of database
+
+
+one to one relationship: person - passpory
+one to many: customer has account
+many to one: customer buys Product
+
+
+Three level of abstraction:
+
+Physical Level: lowest level and consist of database description
+
+Conceptual or Logical: level on which developers and systes admin work and it determines
+	what data is stored in the database
+
+
+View Level: result of queury 
+
+
+
+
+2 tier architecture: client server architecture app at the client end directly communicate with database server
+
+
+3 tier client interacts with server and server interacts with db
+
+
+candidate key: uniquely identifies tables, one key amongst all can be a primary key
+
+
+super key: uniquely identifies tuple its a subset of candidate key and primary key
+
+primary key which is chosed from candidate key
+
+
+Unique Key: same primary key with nul values
+
+alternate: all candidate key which is not chosen as primary key
+
+
+primary key is used in another table as foreign key
+
+
+1NF:
+
+	every column has single value
+	duplicate columns should be removed
+
+
+--------------------------------- Data Structure --------------------------
+
+Implement Queue using a stack
+
+enqueue(q, data):  
+While stack1 is not empty:
+     Push everything from stack1 to stack2.
+      Push data to stack1
+      Push everything back to stack1.
+
+1 2
+
+1 2 2
+
+
+
+Implement Stack using a Queue
+
+push(s, data):
+    Enqueue data to q2
+    Dequeue elements one by one from q1 and enqueue to q2.
+    Swap the names of q1 and q2
+
+
+Binary Search Tree:
+
+
+stores item in a sorted order.
+Each node has key and value
+Key is used to access the item
+value is used to determine whether value present or not
+
+Left sides value should be less than or equal to parent
+
+Right sides value should be grsater than or equal to parent
+
+
+
+Inorder traversal:
+
+Traverse left Visit root and then right subtree
+
+Preorder:
+
+Visit root node
+Traverse Left
+Traverse Tight
+
+
+Post order
+
+1. traverse left
+2. traverse right
+3. Visit Root
+
+
+
+My name is Muhammad Anas. I am from Lahore. I have done graduation in Software Engineering from FAST University. In my academic session I build projects in MERN Stack and did my fyp in Sign detection system.
+
+So public speaking or addressing the large audience and for technical side
+so to achieve micro managing small things to achieve the perfection or spend too much time on detailing that I would like to improve
+
+As the role is related to python and I have worked in Python as well as in JavaScript as well
+
+
+
+Longest non repeating character
+
+
+int longestUniqueSubsttr(string str)
+{
+    int n = str.size();
+    int res = 0; // result
+
+    for (int i = 0; i < n; i++) {
+
+        // Note : Default values in visited are false
+        vector<bool> visited(256);
+
+        for (int j = i; j < n; j++) {
+
+            // If current character is visited
+            // Break the loop
+            if (visited[str[j]] == true)
+                break;
+
+            // Else update the result if
+            // this window is larger, and mark
+            // current character as visited.
+            else {
+                res = max(res, j - i + 1);
+                visited[str[j]] = true;
+            }
+        }
+
+        // Remove the first character of previous
+        // window
+        
+        cout<<"Remove first character of previous window: "<<str[i]<<endl;
+        visited[str[i]] = false;
+    }
+    return res;
+}
+
+
+Example Walkthrough: "geeksforgeeks"
+Let's walk through the example "geeksforgeeks":
+
+Initial State:
+String: "geeksforgeeks"
+Length (n): 13
+Result (res): 0
+Outer Loop: i = 0 (starting from 'g')
+visited array initialized to false.
+Inner Loop:
+j = 0: 'g' (not visited)
+
+Update res: max(0, 0 - 0 + 1) = 1
+Mark 'g' as visited.
+j = 1: 'e' (not visited)
+
+Update res: max(1, 1 - 0 + 1) = 2
+Mark 'e' as visited.
+j = 2: 'e' (already visited)
+
+Break inner loop.
+Mark 'g' as not visited (visited['g'] = false).
+
+
+
+
+boolean hasLoop(Node first) {
+    Node slow = first;
+    Node fast = first;
+
+    while(fast != null && fast.next != null) {
+        slow = slow.next;          // 1 hop
+        fast = fast.next.next;     // 2 hops 
+
+        if(slow == fast)  // fast caught up to slow, so there is a loop
+            return true;
+    }
+    return false;  // fast reached null, so the list terminates
+}
+
+
+
+
+
+
+Append in ith position of array
+
+
+
+
+Semaphore multiple value true
+
+Mutex 1/0 two values
+
+Abstract class one pure function
+
+Process vs thread
+Bst ki time complexity log(n)
+
+
+Buying on day 1 and sell on another day maximum profit
+
+
+SELECT ct.NAME from CITY ct JOIN COUNTRY cr on ct.CountryCode = cr.CODE and cr.CONTINENT ="Africa"
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+/*
+ * Complete the 'isValid' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts STRING s as parameter.
+ */
+
+string isValid(string s) {
+    unordered_map<char, int> charCount;
+    
+    // Count frequency of each character
+    for (char c : s) {
+        charCount[c]++;
+    }
+
+    // Frequency map of the frequencies
+    unordered_map<int, int> freqCount;
+    for (auto& pair : charCount) {
+        freqCount[pair.second]++;
+    }
+    
+    if (freqCount.size() == 1) {
+        // All characters occur with the same frequency
+        return "YES";
+    }
+    
+    if (freqCount.size() == 2) {
+        // Get the two different frequencies
+        auto it = freqCount.begin();
+        int freq1 = it->first;
+        int count1 = it->second;
+        ++it;
+        int freq2 = it->first;
+        int count2 = it->second;
+        
+        // Check if one character can be removed to match frequencies
+        if ((count1 == 1 && (freq1 - 1 == freq2 || freq1 - 1 == 0)) ||
+            (count2 == 1 && (freq2 - 1 == freq1 || freq2 - 1 == 0))) {
+            return "YES";
+        }
+    }
+    
+    return "NO";
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string s;
+    getline(cin, s);
+
+    string result = isValid(s);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+
+
+// Reverse Word like devil is great to great is Devil
+
+    string s = "Devil is Great";
+    
+    char str[255][255] = {0};
+    
+    char buffer[255];
+    
+    int wordcounter = 0;
+    int bufIndex = 0;
+    
+    for(int i = 0; i <= s.length(); i++) {
+        if(s[i] == ' ' || s[i] == '\0') {
+            buffer[bufIndex] = '\0';
+            strcpy(str[wordcounter], buffer);
+            wordcounter++;
+            bufIndex = 0;
+        } else {
+            buffer[bufIndex++] = s[i];
+        }
+    }
+    
+    string reverseSentence = "";
+    
+    for(int i = wordcounter - 1; i >= 0; i--) {
+        reverseSentence += str[i];
+        if (i > 0) {
+            reverseSentence += ' ';
+        }
+    }
+
+
+//  check substring is a rotation of original string
+
+
+// concatenate original like itbag becomes itbagitbag
+// rotation wala gitba
+
+// first we compare i with g not found j loop break then next t with break
+// b with g then a with g then g with g
+
+bool isSubstring(const string &str, const string &substr) {
+    int len1 = str.length(); // waterbottlewaterbottle
+    
+    cout<<len1<<endl;
+    int len2 = substr.length(); // erbottlewat
+    
+    // Loop through the concatenated string
+    for (int i = 0; i <= len1 - len2; i++) {
+        int j;
+        
+        // Check if substr is found in str starting at position i
+        for (j = 0; j < len2; j++) {
+            
+           
+            cout << "i = " << i << ", j = " << j << endl;
+            cout << "substr[j] = " << substr[j] << endl;
+            cout << "str[" << i << " + " << j << "] = " << str[i + j] << endl;
+        
+            
+            
+            if (str[i + j] != substr[j]) {
+                                cout<<"-----------------------"<<endl;
+
+                break;
+            }
+        }
+        
+        // If the inner loop was not broken, substr is found
+        if (j == len2) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool isRotation(const string &s1, const string &s2) {
+    // Step 1: Check if lengths of two strings are equal
+    if (s1.length() != s2.length()) {
+        return false;
+    }
+
+    // Step 2: Concatenate the first string to itself
+    string concatenated = s1 + s1;
+    
+    cout<<"Concatenated String is:"<<concatenated<<endl;
+
+    // Step 3: Check if the second string is a substring of the concatenated string
+    return isSubstring(concatenated, s2);
+}
+
+
+
+
+
+
+bool AreBracketsBalanced:
+
+opening brackets pushing into the stacks
+
+check on top of the stack it closing brackets occured
+
+// Function to check if brackets are balanced
+bool areBracketsBalanced(string expr)
+{
+    // Declare a stack to hold the previous brackets.
+    stack<char> temp;
+    for (int i = 0; i < expr.length(); i++) {
+        if (temp.empty()) {
+            
+            // If the stack is empty 
+            // just push the current bracket
+            temp.push(expr[i]);
+        }
+        else if ((temp.top() == '(' && expr[i] == ')')
+                 || (temp.top() == '{' && expr[i] == '}')
+                 || (temp.top() == '[' && expr[i] == ']')) {
+            
+            // If we found any complete pair of bracket
+            // then pop
+            temp.pop();
+        }
+        else {
+            temp.push(expr[i]);
+        }
+    }
+    if (temp.empty()) {
+        
+        // If stack is empty return true
+        return true;
+    }
+    return false;
+}
+
+
+
+
+// function to print leaf 
+// nodes from left to right
+void printLeafNodes(Node *root)
+{
+	// if node is null, return
+	if (root==NULL)
+		return;
+	
+	// if node is leaf node, print its data 
+	if (root->left==NULL && root->right==NULL)
+	{
+		cout << root->data << " "; 
+		return;
+	}
+
+	// if left child exists, check for leaf 
+	// recursively
+	if (root->left!=NULL)
+	printLeafNodes(root->left);
+		
+	// if right child exists, check for leaf 
+	// recursively
+	if (root->right!=NULL)
+	printLeafNodes(root->right);
+} 
+
+
+
+In a binary Search tree, it maintains a order than left child has less value than parent and right greater than parent
+
+In binary Search Tree complexity is log n because at each step we eliminate half of the nodes if value is less we go left sub tree
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://medium.com/javarevisited/top-21-string-programming-interview-questions-for-beginners-and-experienced-developers-56037048de45
+
+
+
+
